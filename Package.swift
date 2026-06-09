@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "SemanticVersion",
   platforms: [
-    .iOS(.v26)
+    .iOS(.v15)
   ],
   products: [
     .library(

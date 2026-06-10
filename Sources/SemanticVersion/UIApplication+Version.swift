@@ -1,7 +1,12 @@
 import UIKit
 
 extension UIApplication {
-  public static var semanticVersion: SemanticVersion {
+  // `nonisolated` is required: under Swift 6 strict concurrency this
+  // accessor inherits `@MainActor` from `UIApplication`, and an isolation
+  // check inside `compactMap`'s closure traps with `SIGTRAP` when
+  // called from a background queue. Reading `Bundle.main.infoDictionary`
+  // is safe off the main thread.
+  public nonisolated static var semanticVersion: SemanticVersion {
     let dictionary = Bundle.main.infoDictionary!
     let version = dictionary["CFBundleShortVersionString"] as! String
     let build = dictionary["CFBundleVersion"] as! String

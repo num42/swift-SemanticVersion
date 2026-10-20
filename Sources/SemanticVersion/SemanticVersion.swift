@@ -37,8 +37,14 @@ public struct SemanticVersion {
     "\(major).\(minor).\(patch)"
   }
 
+  /// Machine-readable, without a separator before the hash; `init(string:)` parses it back.
   public var versionString: String {
     "v\(shortVersion).\(build)\(displayHash)"
+  }
+
+  /// For showing to users, e.g. `v1.0.0.2026.10.20.10.26 (F5062EF)`.
+  public var displayVersionString: String {
+    "v\(shortVersion).\(build) (\(displayHash))"
   }
 
   private let major: Int
